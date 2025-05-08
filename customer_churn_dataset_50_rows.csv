@@ -1,0 +1,51 @@
+customer_id,age,gender,tenure_months,monthly_spend,num_support_tickets,last_login_days_ago,subscription_type,auto_renewal_enabled,payment_method,avg_session_duration,num_sessions_last_month,has_discount_applied,churned
+C001,58,Male,2,23.79,1,14,Basic,Yes,Credit Card,57.2,2,Yes,0
+C002,23,Male,15,18.12,0,35,Basic,No,Debit Card,45.9,17,Yes,1
+C003,28,Other,28,14.16,1,13,Standard,Yes,Credit Card,40.4,22,No,0
+C004,56,Female,3,23.5,4,7,Standard,Yes,PayPal,76.4,39,No,0
+C005,54,Male,5,7.09,1,49,Standard,Yes,Debit Card,79.3,24,No,0
+C006,47,Other,24,9.89,2,13,Premium,No,Credit Card,58.7,10,Yes,1
+C007,28,Female,25,12.47,5,44,Premium,Yes,PayPal,77.4,3,Yes,1
+C008,20,Female,26,12.42,1,58,Premium,No,Debit Card,62.4,25,No,1
+C009,27,Female,9,11.91,4,34,Standard,No,Wallet,39,8,No,1
+C010,23,Male,8,9.66,1,50,Premium,No,Credit Card,40.8,38,No,1
+C011,51,Female,36,26.65,0,43,Premium,Yes,PayPal,71.5,21,Yes,0
+C012,36,Female,11,16.88,5,56,Premium,No,Debit Card,50.6,6,No,1
+C013,58,Other,13,9.66,6,10,Premium,Yes,PayPal,49.1,7,No,0
+C014,37,Male,4,11.77,4,60,Basic,Yes,Wallet,75.3,34,Yes,0
+C015,26,Other,31,28.71,1,16,Premium,No,Debit Card,84.3,12,No,1
+C016,43,Other,24,16.5,4,28,Basic,Yes,Debit Card,15.1,1,Yes,1
+C017,55,Male,1,7.69,5,3,Basic,Yes,Credit Card,78.8,4,Yes,0
+C018,35,Other,32,11.13,1,46,Premium,No,Debit Card,72.8,26,Yes,1
+C019,24,Male,28,14.49,3,29,Premium,Yes,Credit Card,14.8,21,Yes,0
+C020,33,Male,13,18.86,1,27,Basic,No,Wallet,30,4,No,1
+C021,53,Male,4,21.64,4,53,Basic,Yes,Debit Card,23.3,31,No,0
+C022,31,Female,4,9.94,0,24,Standard,No,PayPal,43.8,35,No,1
+C023,27,Male,19,11.21,0,37,Premium,Yes,PayPal,14.6,37,No,0
+C024,50,Other,11,7.36,4,5,Basic,Yes,Credit Card,64,15,No,0
+C025,25,Other,16,19.88,0,39,Basic,No,PayPal,84.8,13,No,1
+C026,33,Female,26,9.13,5,19,Standard,No,Credit Card,10.7,39,Yes,1
+C027,22,Other,14,18.13,1,59,Standard,Yes,Debit Card,39.6,10,No,0
+C028,52,Other,20,20.67,6,41,Premium,Yes,PayPal,84.5,6,Yes,0
+C029,34,Male,7,23.81,1,17,Standard,Yes,PayPal,26.3,40,No,0
+C030,50,Female,17,27.72,6,3,Basic,No,PayPal,13.5,21,Yes,1
+C031,58,Female,11,23.78,4,45,Standard,Yes,Credit Card,16,9,Yes,0
+C032,41,Other,36,9.54,1,2,Standard,No,Credit Card,81.9,13,Yes,1
+C033,60,Male,23,24.71,6,26,Premium,Yes,Debit Card,79.2,11,No,0
+C034,19,Male,22,24.77,3,51,Premium,Yes,PayPal,22.7,6,No,0
+C035,20,Female,15,10.78,3,22,Standard,Yes,Debit Card,11.9,12,No,0
+C036,39,Female,5,29.2,2,22,Premium,No,PayPal,85.1,7,No,1
+C037,29,Other,17,6.91,4,27,Standard,No,Wallet,58.5,32,Yes,1
+C038,42,Other,13,12.1,5,27,Basic,Yes,PayPal,44.5,21,No,0
+C039,60,Male,20,18.16,5,26,Standard,No,PayPal,54.4,12,No,1
+C040,60,Female,12,20.76,2,25,Premium,Yes,PayPal,33,27,No,0
+C041,47,Female,29,22.21,4,30,Premium,Yes,Credit Card,32.7,40,No,0
+C042,23,Male,20,11.38,1,9,Basic,Yes,Debit Card,88.7,39,Yes,0
+C043,47,Female,13,23.23,3,31,Standard,Yes,Debit Card,62.5,0,Yes,1
+C044,45,Male,12,25.29,5,33,Standard,Yes,Debit Card,83.4,7,No,0
+C045,26,Female,34,29.7,4,20,Standard,No,Wallet,81.8,30,No,1
+C046,34,Male,18,24.37,4,31,Premium,Yes,PayPal,45.2,18,Yes,0
+C047,35,Female,21,27.42,0,8,Basic,Yes,Wallet,65.5,13,Yes,0
+C048,44,Female,22,19.01,3,3,Basic,No,Wallet,82.4,37,Yes,1
+C049,54,Female,31,6.13,2,19,Standard,No,Debit Card,49.1,17,No,1
+C050,49,Male,25,14.06,5,51,Standard,Yes,Wallet,83.6,39,Yes,0
