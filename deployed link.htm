@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Prediction</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --danger-color: #e74c3c;
+            --success-color: #2ecc71;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --gray-color: #95a5a6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        nav ul li a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+            background-color: white;
+            margin-bottom: 30px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: var(--gray-color);
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Prediction Form */
+        .prediction-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            border-bottom: 2px solid var(--light-color);
+            padding-bottom: 10px;
+        }
+        
+        .prediction-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        /* Results Section */
+        .results {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .result-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .result-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .churn {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--danger-color);
+        }
+        
+        .no-churn {
+            background-color: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid var(--success-color);
+        }
+        
+        .probability {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .churn .probability {
+            color: var(--danger-color);
+        }
+        
+        .no-churn .probability {
+            color: var(--success-color);
+        }
+        
+        /* Features Importance */
+        .features-importance {
+            margin-top: 30px;
+        }
+        
+        .feature-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: var(--light-color);
+            border-radius: 4px;
+        }
+        
+        .feature-name {
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .prediction-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">ChurnPredict</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">API</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Predict Customer Churn with AI</h1>
+            <p>Our advanced machine learning model analyzes customer behavior and predicts likelihood of churn, helping you take proactive measures to retain valuable customers.</p>
+        </div>
+    </section>
+    
+    <div class="container">
+        <section class="prediction-section">
+            <h2 class="section-title">Customer Information</h2>
+            <form id="churnForm" class="prediction-form">
+                <div class="form-group">
+                    <label for="tenure">Tenure (months)</label>
+                    <input type="number" id="tenure" class="form-control" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="monthlyCharges">Monthly Charges ($)</label>
+                    <input type="number" id="monthlyCharges" class="form-control" min="0" step="0.01" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="totalCharges">Total Charges ($)</label>
+                    <input type="number" id="totalCharges" class="form-control" min="0" step="0.01" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contract">Contract Type</label>
+                    <select id="contract" class="form-control" required>
+                        <option value="">Select...</option>
+                        <option value="month-to-month">Month-to-month</option>
+                        <option value="one-year">One year</option>
+                        <option value="two-year">Two year</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="internetService">Internet Service</label>
+                    <select id="internetService" class="form-control" required>
+                        <option value="">Select...</option>
+                        <option value="dsl">DSL</option>
+                        <option value="fiber">Fiber optic</option>
+                        <option value="no">No internet service</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="onlineSecurity">Online Security</label>
+                    <select id="onlineSecurity" class="form-control" required>
+                        <option value="">Select...</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                        <option value="no-internet">No internet service</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="techSupport">Tech Support</label>
+                    <select id="techSupport" class="form-control" required>
+                        <option value="">Select...</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                        <option value="no-internet">No internet service</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="paymentMethod">Payment Method</label>
+                    <select id="paymentMethod" class="form-control" required>
+                        <option value="">Select...</option>
+                        <option value="electronic-check">Electronic check</option>
+                        <option value="mailed-check">Mailed check</option>
+                        <option value="bank-transfer">Bank transfer</option>
+                        <option value="credit-card">Credit card</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="paperlessBilling">Paperless Billing</label>
+                    <select id="paperlessBilling" class="form-control" required>
+                        <option value="">Select...</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" style="grid-column: span 2;">
+                    <button type="submit" class="btn btn-block">Predict Churn Risk</button>
+                </div>
+            </form>
+        </section>
+        
+        <section id="resultsSection" class="results">
+            <h2 class="section-title">Prediction Results</h2>
+            
+            <div id="predictionResult" class="result-card">
+                <!-- Results will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="features-importance">
+                <h3>Key Factors Influencing This Prediction</h3>
+                <div class="feature-item">
+                    <span class="feature-name">Contract Type</span>
+                    <span class="feature-impact">High Impact</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-name">Tenure</span>
+                    <span class="feature-impact">High Impact</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-name">Internet Service</span>
+                    <span class="feature-impact">Medium Impact</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-name">Monthly Charges</span>
+                    <span class="feature-impact">Medium Impact</span>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container footer-content">
+            <p>© 2023 ChurnPredict. All rights reserved.</p>
+            <p>Powered by machine learning models to help businesses retain customers.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // This would be connected to your actual prediction API
+        document.getElementById('churnForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real implementation, you would send this data to your prediction API
+            // For this demo, we'll just show sample results
+            
+            const resultsSection = document.getElementById('resultsSection');
+            const predictionResult = document.getElementById('predictionResult');
+            
+            // Show loading state
+            predictionResult.innerHTML = '<div class="result-title">Analyzing customer data...</div>';
+            resultsSection.style.display = 'block';
+            
+            // Simulate API call with timeout
+            setTimeout(() => {
+                // Random result for demo purposes
+                const willChurn = Math.random() > 0.5;
+                const probability = (Math.random() * 100).toFixed(1);
+                
+                if (willChurn) {
+                    predictionResult.innerHTML = `
+                        <div class="result-title">This customer is likely to churn</div>
+                        <div class="probability">${probability}%</div>
+                        <p>We recommend reaching out with retention offers or troubleshooting their issues.</p>
+                    `;
+                    predictionResult.className = 'result-card churn';
+                } else {
+                    predictionResult.innerHTML = `
+                        <div class="result-title">This customer is unlikely to churn</div>
+                        <div class="probability">${probability}%</div>
+                        <p>This customer appears satisfied with their current service.</p>
+                    `;
+                    predictionResult.className = 'result-card no-churn';
+                }
+                
+                // Scroll to results
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
