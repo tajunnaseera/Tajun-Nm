@@ -1,0 +1,6 @@
+## Demo Instructions
+
+1. Open the Google Colab Notebook.
+2. Upload the dataset.csv file.
+3. Run all cells to train the model and predict customer churn.
+4. Open the deployed link to test the model with new inputs.
